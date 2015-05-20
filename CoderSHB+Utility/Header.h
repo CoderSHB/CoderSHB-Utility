@@ -8,7 +8,6 @@
 #ifndef Header_h
 #define Header_h
 
-#import "Foundation+Utility.h"
 #import "NSDate+Utility.h"
 #import "NSString+Emoji.h"
 #import "NSString+Utility.h"
