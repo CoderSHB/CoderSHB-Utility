@@ -57,4 +57,13 @@
  */
 - (void)saveToNSDefaultsWithKey:(NSString *)key;
 
+/**
+ *  将汉字字符串转为拼音字符串
+ *
+ *  @param string 传入的汉字字符串
+ *
+ *  @return 返回拼音字符串
+ */
++ (NSString *)transformPinyinFromString:(NSString *)string;
+
 @end

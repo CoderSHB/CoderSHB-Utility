@@ -76,4 +76,16 @@
   [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
++ (NSString *)transformPinyinFromString:(NSString *)string
+{
+    NSMutableString *stringM = [NSMutableString stringWithString:string];
+    CFMutableStringRef stringRef = (__bridge CFMutableStringRef)stringM;
+    
+    CFStringTransform(stringRef, nil, kCFStringTransformMandarinLatin, NO);
+    CFStringTransform(stringRef, nil, kCFStringTransformStripDiacritics, NO);
+    
+    string = (__bridge NSString *)stringRef;
+    return string.lowercaseString;
+}
+
 @end
