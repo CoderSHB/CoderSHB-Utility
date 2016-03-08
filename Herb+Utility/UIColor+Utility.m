@@ -10,8 +10,8 @@
 
 @implementation UIColor (Utility)
 
-+ (UIColor *)colorWithHexString:(NSString *)hexString
-{
++ (UIColor *)colorWithHexString:(NSString *)hexString {
+    
   NSString *cString = [[hexString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
   
   if ([cString length] < 6) {

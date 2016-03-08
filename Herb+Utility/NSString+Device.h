@@ -2,10 +2,15 @@
 //  NSString+Device.h
 //
 //  Created by SHB on 16/1/4.
-//  Copyright © 2016年 OKCoin. All rights reserved.
+//  Copyright © 2016年 CoderSHB. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+
+FOUNDATION_EXTERN BOOL isiPhone4(void);
+FOUNDATION_EXTERN BOOL isiPhone5(void);
+FOUNDATION_EXTERN BOOL isiPhone6(void);
+FOUNDATION_EXTERN BOOL isiPhone6P(void);
 
 @interface NSString (Device)
 

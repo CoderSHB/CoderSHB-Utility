@@ -2,7 +2,7 @@
 //  NSArray+Addition.h
 //
 //  Created by SHB on 15/12/22.
-//  Copyright © 2015年 OKCoin. All rights reserved.
+//  Copyright © 2015年 CoderSHB. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

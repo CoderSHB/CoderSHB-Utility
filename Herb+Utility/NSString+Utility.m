@@ -11,10 +11,10 @@
 /** 是否为iOS7 */
 #define iOS7 (([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) ? YES : NO)
 
-@implementation NSString (SHB)
+@implementation NSString (Utility)
 
-- (long long)fileSize
-{
+- (long long)fileSize {
+    
   NSFileManager *mgr = [NSFileManager defaultManager];
   BOOL isDirectory = NO;
   BOOL fileExists = [mgr fileExistsAtPath:self isDirectory:&isDirectory];
@@ -35,20 +35,23 @@
   }
 }
 
-- (CGSize)sizeOfStringWithFont:(UIFont *)font maxSize:(CGSize)maxSize
-{
+- (CGSize)sizeOfStringWithFont:(UIFont *)font maxSize:(CGSize)maxSize {
+    
   NSDictionary *fontDict = @{NSFontAttributeName : font};
   
   if (iOS7) {
     CGRect rect = [self boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:fontDict context:nil];
     return rect.size;
   } else {
-    return [self sizeWithFont:font constrainedToSize:maxSize];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated"
+      return [self sizeWithFont:font constrainedToSize:maxSize];
+#pragma clang diagnostic pop
   }
 }
 
-- (CGFloat)heightOfStringWithFont:(UIFont *)font width:(CGFloat)width
-{
+- (CGFloat)heightOfStringWithFont:(UIFont *)font width:(CGFloat)width {
+    
   NSDictionary *fontDict = @{NSFontAttributeName : font};
   CGSize maxSize = CGSizeMake(width, MAXFLOAT);
   
@@ -56,28 +59,31 @@
     CGRect rect = [self boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:fontDict context:nil];
     return rect.size.height;
   } else {
-    return [self sizeWithFont:font constrainedToSize:maxSize].height;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated"
+      return [self sizeWithFont:font constrainedToSize:maxSize].height;
+#pragma clang diagnostic pop
   }
 }
 
-- (NSString *)trimString
-{
+- (NSString *)trimString {
+    
   return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
-- (BOOL)isEmptyString
-{
+- (BOOL)isEmptyString {
+    
   return (self == nil || self.length == 0);
 }
 
-- (void)saveToNSDefaultsWithKey:(NSString *)key
-{
+- (void)saveToNSDefaultsWithKey:(NSString *)key {
+    
   [[NSUserDefaults standardUserDefaults] setObject:self forKey:key];
   [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+ (NSString *)transformPinyinFromString:(NSString *)string
-{
++ (NSString *)transformPinyinFromString:(NSString *)string {
+    
     NSMutableString *stringM = [NSMutableString stringWithString:string];
     CFMutableStringRef stringRef = (__bridge CFMutableStringRef)stringM;
     

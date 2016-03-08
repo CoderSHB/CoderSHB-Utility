@@ -2,9 +2,10 @@
 //  NSString+Device.m
 //
 //  Created by SHB on 16/1/4.
-//  Copyright © 2016年 OKCoin. All rights reserved.
+//  Copyright © 2016年 CoderSHB. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "NSString+Device.h"
 #import "sys/utsname.h"
 
@@ -14,6 +15,22 @@
     #define SIMULATOR 0
 #endif
 
+BOOL isiPhone4(void) {
+    return [NSString isiPhone4];
+}
+
+BOOL isiPhone5(void) {
+    return [NSString isiPhone5];
+}
+
+BOOL isiPhone6(void) {
+    return [NSString isiPhone6];
+}
+
+BOOL isiPhone6P(void) {
+    return [NSString isiPhone6P];
+}
+
 @implementation NSString (Device)
 
 + (BOOL)isiPhone4 {
@@ -22,7 +39,6 @@
     } else {
         return [[NSString deviceVersion] isEqualToString:@"iPhone 4"]
                 || [[NSString deviceVersion] isEqualToString:@"iPhone 4S"];
-
     }
 }
 
@@ -47,7 +63,7 @@
 
 + (BOOL)isiPhone6P {
     if (SIMULATOR) {
-       return [UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750,1334), [[UIScreen mainScreen] currentMode].size) : NO;
+       return [UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242,2208), [[UIScreen mainScreen] currentMode].size) : NO;
     } else {
         return [[NSString deviceVersion] isEqualToString:@"iPhone 6 Plus"]
         || [[NSString deviceVersion] isEqualToString:@"iPhone 6S Plus"];
@@ -60,7 +76,7 @@
  *  @return e.g. iPhone 5S
  */
 + (NSString *)deviceVersion {
-    // 需要#import "sys/utsname.h"
+
     struct utsname systemInfo;
     uname(&systemInfo);
     NSString *deviceString = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];

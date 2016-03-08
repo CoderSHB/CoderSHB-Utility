@@ -2,7 +2,7 @@
 //  NSLocale+Addition.h
 //
 //  Created by SHB on 15/12/18.
-//  Copyright © 2015年 Sunshine. All rights reserved.
+//  Copyright © 2015年 CoderSHB. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

@@ -21,15 +21,13 @@
     return string;
 }
 
-+ (NSString *)emojiWithStringCode:(NSString *)stringCode
-{
++ (NSString *)emojiWithStringCode:(NSString *)stringCode {
     char *charCode = (char *)stringCode.UTF8String;
     int intCode = (int)strtol(charCode, NULL, 16);
     return [self emojiWithIntCode:intCode];
 }
 
-- (BOOL)isEmoji
-{
+- (BOOL)isEmoji {
      BOOL returnValue = NO;
          
      const unichar hs = [self characterAtIndex:0];

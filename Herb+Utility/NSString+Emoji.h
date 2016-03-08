@@ -24,4 +24,5 @@
  *  是否为emoji字符
  */
 - (BOOL)isEmoji;
+
 @end

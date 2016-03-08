@@ -10,123 +10,99 @@
 
 @implementation UIButton (Utility)
 
-- (void)setHighlightedTitle:(NSString *)highlightedTitle
-{
+- (void)setHighlightedTitle:(NSString *)highlightedTitle {
     [self setTitle:highlightedTitle forState:UIControlStateHighlighted];
 }
 
-- (NSString *)highlightedTitle
-{
+- (NSString *)highlightedTitle {
     return nil;
 }
 
-- (void)setTitleColor:(UIColor *)titleColor
-{
+- (void)setTitleColor:(UIColor *)titleColor {
     [self setTitleColor:titleColor forState:UIControlStateNormal];
 }
 
-- (UIColor *)titleColor
-{
+- (UIColor *)titleColor {
     return nil;
 }
 
-- (void)setHighlightedTitleColor:(UIColor *)highlightedTitleColor
-{
+- (void)setHighlightedTitleColor:(UIColor *)highlightedTitleColor {
     [self setTitleColor:highlightedTitleColor forState:UIControlStateHighlighted];
 }
 
-- (UIColor *)highlightedTitleColor
-{
+- (UIColor *)highlightedTitleColor {
     return nil;
 }
 
-- (void)setSelectedTitleColor:(UIColor *)selectedTitleColor
-{
+- (void)setSelectedTitleColor:(UIColor *)selectedTitleColor {
     [self setTitleColor:selectedTitleColor forState:UIControlStateSelected];
 }
 
-- (UIColor *)selectedTitleColor
-{
+- (UIColor *)selectedTitleColor {
     return nil;
 }
 
-- (void)setTitle:(NSString *)title
-{
+- (void)setTitle:(NSString *)title {
     [self setTitle:title forState:UIControlStateNormal];
 }
 
-- (NSString *)title
-{
+- (NSString *)title {
     return [self titleForState:UIControlStateNormal];
 }
 
-- (void)setSelectedTitle:(NSString *)selectedTitle
-{
+- (void)setSelectedTitle:(NSString *)selectedTitle {
     [self setTitle:selectedTitle forState:UIControlStateSelected];
 }
 
-- (NSString *)selectedTitle
-{
+- (NSString *)selectedTitle {
     return [self titleForState:UIControlStateSelected];
 }
 
-- (void)setImage:(NSString *)image
-{
+- (void)setImage:(NSString *)image {
     [self setImage:[UIImage imageNamed:image] forState:UIControlStateNormal];
 }
 
-- (NSString *)image
-{
+- (NSString *)image {
     return nil;
 }
 
-- (void)setHighlightedImage:(NSString *)image
-{
+- (void)setHighlightedImage:(NSString *)image {
     [self setImage:[UIImage imageNamed:image] forState:UIControlStateHighlighted];
 }
 
-- (NSString *)highlightedImage
-{
+- (NSString *)highlightedImage {
     return nil;
 }
 
-- (void)setSelectedImage:(NSString *)image
-{
+- (void)setSelectedImage:(NSString *)image {
     [self setImage:[UIImage imageNamed:image] forState:UIControlStateSelected];
 }
 
-- (NSString *)selectedImage
-{
+- (NSString *)selectedImage {
     return nil;
 }
 
-- (void)setBgImage:(NSString *)image
-{
+- (void)setBgImage:(NSString *)image {
     [self setBackgroundImage:[UIImage imageNamed:image] forState:UIControlStateNormal];
 }
 
-- (NSString *)bgImage
-{
+- (NSString *)bgImage {
     return nil;
 }
 
-- (void)setHighlightedBgImage:(NSString *)image
-{
+- (void)setHighlightedBgImage:(NSString *)image {
     [self setBackgroundImage:[UIImage imageNamed:image] forState:UIControlStateHighlighted];
 }
 
-- (NSString *)highlightedBgImage
-{
+- (NSString *)highlightedBgImage {
     return nil;
 }
 
-- (void)setSelectedBgImage:(NSString *)image
-{
+- (void)setSelectedBgImage:(NSString *)image {
     [self setBackgroundImage:[UIImage imageNamed:image] forState:UIControlStateSelected];
 }
 
-- (NSString *)selectedBgImage
-{
+- (NSString *)selectedBgImage {
     return nil;
 }
 

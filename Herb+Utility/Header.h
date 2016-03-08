@@ -8,9 +8,12 @@
 #ifndef Header_h
 #define Header_h
 
-#import "NSDate+Utility.h"
+#import "NSArray+Addition.h"
+#import "NSLocale+Addition.h"
+#import "NSString+Device.h"
 #import "NSString+Emoji.h"
 #import "NSString+Utility.h"
+
 #import "UIButton+Utility.h"
 #import "UIColor+Utility.h"
 #import "UIImage+Utility.h"

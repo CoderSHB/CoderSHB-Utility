@@ -2,10 +2,12 @@
 //  NSLocale+Addition.m
 //
 //  Created by SHB on 15/12/18.
-//  Copyright © 2015年 Sunshine. All rights reserved.
+//  Copyright © 2015年 CoderSHB. All rights reserved.
 //
 
 #import "NSLocale+Addition.h"
+
+#define kBLOCK_SAFE_EXEC(block, ...)   if(block){block(__VA_ARGS__);};
 
 @implementation NSLocale (Addition)
 
@@ -14,13 +16,13 @@
     NSArray *languages = [NSLocale preferredLanguages];
     NSString *languageString = [languages firstObject];
     
-    if ([languageString ok_containsString:@"en"]) {
+    if ([languageString containsString:@"en"]) {
         // 英文
         return OCLocaleLanguageType_en;
-    } else if ([languageString ok_containsString:@"zh-Hans"]) {
+    } else if ([languageString containsString:@"zh-Hans"]) {
         // 简体中文
         return OCLocaleLanguageType_Hans;
-    } else if ([languageString ok_containsString:@"zh-Hant"]) {
+    } else if ([languageString containsString:@"zh-Hant"]) {
         // 繁体中文
         return OCLocaleLanguageType_Hant;
     }
@@ -33,17 +35,14 @@
 
 + (void)localLanguageOperationWithHans:(void (^)())han_sBlock hant:(void (^)())han_tBlock en:(void (^)())enBlock {
     if (kCurrentLanguageType == OCLocaleLanguageType_Hans) {
-        if (han_sBlock) {
-            han_sBlock();
-        }
+
+        kBLOCK_SAFE_EXEC(han_sBlock);
     } else if (kCurrentLanguageType == OCLocaleLanguageType_Hant) {
-        if (han_tBlock) {
-            han_tBlock();
-        }
+        
+        kBLOCK_SAFE_EXEC(han_tBlock);
     } else {
-        if (enBlock) {
-            enBlock();
-        }
+        
+        kBLOCK_SAFE_EXEC(enBlock);
     }
 }
 
