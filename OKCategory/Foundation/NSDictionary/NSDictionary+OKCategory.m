@@ -5,6 +5,7 @@
 //
 
 #import "NSDictionary+OKCategory.h"
+#import "NSObject+OKRuntime.h"
 
 @implementation NSDictionary (OKCategory)
 
@@ -116,8 +117,10 @@
         if ([string length]) {
             [string appendString:@"&"];
         }
-        CFStringRef escaped = CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)[[self objectForKey:key] description],
-                                                                      NULL, (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+        CFStringRef escaped = CFURLCreateStringByAddingPercentEscapes(NULL,
+                                                                      (CFStringRef)[[self objectForKey:key] description],
+                                                                      NULL,
+                                                                      (CFStringRef)@"!*'();:@&=+$,/?%#[]",
                                                                       kCFStringEncodingUTF8);
         [string appendFormat:@"%@=%@", key, escaped];
         CFRelease(escaped);
@@ -132,6 +135,62 @@
 #pragma mark - NSDictionary OKSafeAccess
 
 @implementation NSDictionary (OKSafeAccess)
+
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self ok_swizzleMethod:@selector(initWithObjects:forKeys:count:)
+                        withMethod:@selector(ok_initWithObjects:forKeys:count:)];
+        [self ok_swizzleClassMethod:@selector(dictionaryWithObjects:forKeys:count:)
+                         withMethod:@selector(ok_dictionaryWithObjects:forKeys:count:)];
+    });
+}
+
+- (instancetype)ok_initWithObjects:(const id [])objects
+                           forKeys:(const id<NSCopying> [])keys
+                             count:(NSUInteger)cnt {
+    
+    id safeObjects[cnt];
+    id safeKeys[cnt];
+    NSUInteger j = 0;
+    for (NSUInteger i = 0; i < cnt; i++) {
+        id key = keys[i];
+        id obj = objects[i];
+        if (!key) {
+            continue;
+        }
+        if (!obj) {
+            obj = [NSNull null];
+        }
+        safeKeys[j] = key;
+        safeObjects[j] = obj;
+        j++;
+    }
+    return [self ok_initWithObjects:safeObjects forKeys:safeKeys count:j];
+}
+
++ (instancetype)ok_dictionaryWithObjects:(const id [])objects
+                                 forKeys:(const id<NSCopying> [])keys
+                                   count:(NSUInteger)cnt {
+    
+    id safeObjects[cnt];
+    id safeKeys[cnt];
+    NSUInteger j = 0;
+    for (NSUInteger i = 0; i < cnt; i++) {
+        id key = keys[i];
+        id obj = objects[i];
+        if (!key) {
+            continue;
+        }
+        if (!obj) {
+            obj = [NSNull null];
+        }
+        safeKeys[j] = key;
+        safeObjects[j] = obj;
+        j++;
+    }
+    return [self ok_dictionaryWithObjects:safeObjects forKeys:safeKeys count:j];
+}
 
 - (BOOL)ok_hasKey:(NSString *)key {
     return [self objectForKey:key] != nil;
@@ -391,16 +450,35 @@
 
 @implementation NSMutableDictionary (OKSafeAccess)
 
-- (void)ok_setValue:(id)value forKey:(NSString *)key {
-    if (value && key) {
-        [self setValue:value forKey:key];
-    }
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        Class class = NSClassFromString(@"__NSDictionaryM");
+        [class ok_swizzleMethod:@selector(setObject:forKey:)
+                     withMethod:@selector(ok_setObject:forKey:)];
+        [class ok_swizzleMethod:@selector(setObject:forKeyedSubscript:)
+                     withMethod:@selector(ok_setObject:forKeyedSubscript:)];
+    });
 }
 
-- (void)ok_setObject:(id)value forKey:(NSString *)key {
-    if (value && key) {
-        [self setObject:value forKey:key];
+- (void)ok_setObject:(id)anObject forKey:(id<NSCopying>)aKey {
+    if (!aKey) {
+        return;
     }
+    if (!anObject) {
+        anObject = [NSNull null];
+    }
+    [self ok_setObject:anObject forKey:aKey];
+}
+
+- (void)ok_setObject:(id)obj forKeyedSubscript:(id<NSCopying>)key {
+    if (!key) {
+        return;
+    }
+    if (!obj) {
+        obj = [NSNull null];
+    }
+    [self ok_setObject:obj forKeyedSubscript:key];
 }
 
 - (void)setPoint:(CGPoint)point forKey:(NSString *)key {

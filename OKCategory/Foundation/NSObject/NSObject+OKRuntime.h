@@ -16,7 +16,15 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param originalMethod 原始方法实现
  *  @param newMethod      新方法实现
  */
-+ (void)ok_swizzleMethod:(SEL)originalMethod withMethod:(SEL)newMethod;
++ (BOOL)ok_swizzleMethod:(SEL)originalMethod withMethod:(SEL)newMethod;
+
+/**
+ *  @brief 交换类方法实现
+ *
+ *  @param originalMethod 原始方法
+ *  @param newMethod      新方法
+ */
++ (BOOL)ok_swizzleClassMethod:(SEL)originalMethod withMethod:(SEL)newMethod;
 
 /**
  *  @brief 给类添加方法

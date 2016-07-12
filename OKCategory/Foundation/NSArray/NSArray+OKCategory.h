@@ -54,21 +54,6 @@
 
 @interface NSArray (SafeAccess)
 
-/**
- *  @brief 安全访问数组的第index元素的方法
- *
- *  @abstract 检查是否越界 和 元素是否为NSNull 如果是 return nil
- *
- */
-- (id)ok_objectAtIndex:(NSUInteger)index;
-
-/**
- *  @brief 安全获取子数组方法
- *
- *  @abstract 检查range是否越界 如果越界 return @[]
- */
-- (NSArray *)ok_subarrayWithRange:(NSRange)range;
-
 - (NSString *)ok_stringWithIndex:(NSUInteger)index;
 
 - (NSNumber *)ok_numberWithIndex:(NSUInteger)index;

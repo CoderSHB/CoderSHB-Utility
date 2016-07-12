@@ -120,9 +120,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSMutableDictionary (OKSafeAccess)
 
-- (void)ok_setValue:(id)value forKey:(NSString *)key;
-- (void)ok_setObject:(id)value forKey:(NSString *)key;
-
 - (void)setPoint:(CGPoint)point forKey:(NSString *)key;
 - (void)setSize:(CGSize)size forKey:(NSString *)key;
 - (void)setRect:(CGRect)rect forKey:(NSString *)key;
