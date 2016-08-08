@@ -351,6 +351,19 @@ static const void *FailBlockKey     = &FailBlockKey;
     return scaledImage;
 }
 
+/// 设置圆形图片
+- (UIImage *)ok_circleImage {
+    UIGraphicsBeginImageContextWithOptions(self.size, NO, 0.0);
+    CGContextRef ctr = UIGraphicsGetCurrentContext();
+    CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
+    CGContextAddEllipseInRect(ctr, rect);
+    CGContextClip(ctr);
+    [self drawInRect:rect];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
 // Returns a copy of this image that is cropped to the given bounds.
 // The bounds will be adjusted using CGRectIntegral.
 // This method ignores the image's imageOrientation setting.

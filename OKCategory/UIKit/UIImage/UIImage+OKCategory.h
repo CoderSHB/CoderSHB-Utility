@@ -98,6 +98,9 @@ typedef NS_ENUM (NSInteger, OKImageBlurType) {
 /// 缩小图片到合适的尺寸
 - (UIImage *)ok_scaleToSize:(CGSize)newSize;
 
+/// 设置成圆形图片(避免使用cornerRadius防止卡顿)
+- (UIImage *)ok_circleImage;
+
 /**
  *  @brief  取图片某一点的颜色
  *
